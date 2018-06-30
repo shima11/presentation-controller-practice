@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class MyPresentationController: UIPresentationController {
 
     override var frameOfPresentedViewInContainerView: CGRect {
@@ -32,7 +31,8 @@ class MyPresentationController: UIPresentationController {
 
     private let tapView: UIVisualEffectView = {
         let view  = UIVisualEffectView()
-        view.effect = nil
+        view.effect = UIBlurEffect(style: .regular)
+        view.alpha = 0
         return view
     }()
 
@@ -60,7 +60,7 @@ class MyPresentationController: UIPresentationController {
         guard let transitionCoordinator = presentingViewController.transitionCoordinator else { return }
         transitionCoordinator.animate(
             alongsideTransition: { context in
-                self.tapView.effect = UIBlurEffect(style: .regular)
+                self.tapView.alpha = 1.0
         },
             completion: nil
         )
@@ -80,7 +80,7 @@ class MyPresentationController: UIPresentationController {
         guard let transitionCoordinator = presentingViewController.transitionCoordinator else { return }
         transitionCoordinator.animate(
             alongsideTransition: { context in
-                self.tapView.effect = nil
+                self.tapView.alpha = 0
         },
             completion: nil
         )
